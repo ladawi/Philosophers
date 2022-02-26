@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:53:45 by ladawi            #+#    #+#             */
-/*   Updated: 2022/02/24 22:20:41 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/02/26 17:38:40 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,9 @@ int	set_mutex(void)
 		return (printf("\n Mutex init failed\n"));
 	if (pthread_mutex_init(&sg()->lock->philo_ded, NULL) != 0)
 		return (printf("\n Mutex init failed\n"));
-	if (pthread_mutex_init(&sg()->lock->test, NULL) != 0)
+	if (pthread_mutex_init(&sg()->lock->sync, NULL) != 0)
+		return (printf("\n Mutex init failed\n"));
+	if (pthread_mutex_init(&sg()->lock->print, NULL) != 0)
 		return (printf("\n Mutex init failed\n"));
 	return (0);
 }

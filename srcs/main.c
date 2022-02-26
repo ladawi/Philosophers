@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 20:08:02 by ladawi            #+#    #+#             */
-/*   Updated: 2022/02/24 22:01:53 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/02/26 19:08:47 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,11 @@ int	main(int ac, char **av)
 	printf("[%d]_", sg()->settings->time_tosleep);
 	printf("[%d]\n", sg()->settings->nb_eat_max);
 	ft_create_all_thread();
-	while (1);
+		// printf("puke\n");
+	while (1)
+	{
+		// printf("MUKMUKMUKMUK\n");
+	}
 	// ft_pthread_join_all();
 	return (0);
 }

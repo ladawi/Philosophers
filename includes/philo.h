@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Philo.h                                            :+:      :+:    :+:   */
+/*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 21:02:23 by ladawi            #+#    #+#             */
-/*   Updated: 2022/02/24 22:20:42 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/02/26 18:10:50 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,14 @@ typedef struct s_lock
 	pthread_mutex_t	all;
 	pthread_mutex_t	timestamp;
 	pthread_mutex_t	philo_ded;
-	pthread_mutex_t	test;
+	pthread_mutex_t	sync;
+	pthread_mutex_t	print;
 }				t_lock;
 
 typedef struct s_data
 {
 	t_settings		*settings;
-	t_philo			*philo_tab[200];
+	t_philo			*philo_tab[BUFF_SIZE];
 	t_lock			*lock;
 	long long int	timestart;
 	int				all_thread_launched;
@@ -69,6 +70,7 @@ int						ft_strncmp(const char *s1, const char *s2, size_t n);
 int						ft_atoi(const char *str);
 char					*ft_itoa(long int n);
 
+void					ft_usleep(long long unsigned int sleep_time);
 void					*routine(void *arg);
 void					set_philo(void);
 void					ft_create_all_thread(void);

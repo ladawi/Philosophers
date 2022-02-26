@@ -6,14 +6,14 @@
 #    By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/07 12:54:34 by ladawi            #+#    #+#              #
-#    Updated: 2022/02/24 20:53:27 by ladawi           ###   ########.fr        #
+#    Updated: 2022/02/26 15:32:18 by ladawi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 CC = clang
 HEAD = -Iincludes
-CFLAGS = -Wall -Wextra $(DEBUG) # g3 -pthread
+CFLAGS = -Wall -Wextra $(DEBUG) -g3 -pthread
 # DEBUG = -fsanitize=thread
 
 
