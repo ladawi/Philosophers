@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 20:16:10 by ladawi            #+#    #+#             */
-/*   Updated: 2022/02/26 17:39:22 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/15 15:09:58 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,26 +80,34 @@ char	*ft_itoa(long int n)
 
 void	ft_print_status(size_t id_philo, char c)
 {
+	int	is_philo_ded;
+	
 	pthread_mutex_lock(&sg()->lock->print);
-	if (c == 'f')
+	pthread_mutex_lock(&sg()->lock->philo_ded);
+	is_philo_ded = sg()->philo_dead;
+	pthread_mutex_unlock(&sg()->lock->philo_ded);
+	if (is_philo_ded == 0)
 	{
-		printf("%llu | Philo[%zu] has taken a fork ...\n",
-			set_timestamp(), id_philo);
-	}
-	else if (c == 'e')
-	{
-		printf("%llu | Philo[%zu] is eating ...\n",
-			set_timestamp(), id_philo);
-	}
-	else if (c == 's')
-	{
-		printf("%llu | Philo[%zu] is sleeping ... \n",
-			set_timestamp(), id_philo);
-	}
-	else if (c == 't')
-	{
-		printf("%llu | Philo[%zu] is thinking ...\n",
-			set_timestamp(), id_philo);
+		if (c == 'f')
+		{
+			printf("%llu | Philo[%zu] has taken a fork ...\n",
+				set_timestamp(), id_philo);
+		}
+		else if (c == 'e')
+		{
+			printf("%llu | Philo[%zu] is eating ...\n",
+				set_timestamp(), id_philo);
+		}
+		else if (c == 's')
+		{
+			printf("%llu | Philo[%zu] is sleeping ...\n",
+				set_timestamp(), id_philo);
+		}
+		else if (c == 't')
+		{
+			printf("%llu | Philo[%zu] is thinking ...\n",
+				set_timestamp(), id_philo);
+		}
 	}
 	pthread_mutex_unlock(&sg()->lock->print);
 }

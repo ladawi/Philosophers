@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 20:48:40 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/03 02:29:53 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/15 14:42:05 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	philo_think(size_t id_philo)
 	ft_print_status(id_philo, 't');
 } 
 
-void	lock_fork(size_t id_philo, int timetoeat, int nb_philo)
+void	lock_fork(size_t id_philo, int nb_philo)
 {
 	pthread_mutex_lock(&sg()->philo_tab[id_philo]->fork);
 	ft_print_status(id_philo, 'f');
@@ -40,7 +40,7 @@ void	lock_fork(size_t id_philo, int timetoeat, int nb_philo)
 	ft_print_status(id_philo, 'f');
 }
 
-void	unlock_fork(size_t id_philo, int timetoeat, int nb_philo)
+void	unlock_fork(size_t id_philo, int nb_philo)
 {
 	pthread_mutex_unlock(&sg()->philo_tab[id_philo]->fork);
 	if (id_philo + 1 >= (size_t)nb_philo)
@@ -51,13 +51,13 @@ void	unlock_fork(size_t id_philo, int timetoeat, int nb_philo)
 
 void	philo_eat(size_t id_philo, int timetoeat, int nb_philo)
 {
-	lock_fork(id_philo, timetoeat, nb_philo);
+	lock_fork(id_philo, nb_philo);
 	
 	ft_print_status(id_philo, 'e');
 	ft_usleep(timetoeat);
 	sg()->philo_tab[id_philo]->time_last_eat = set_timestamp();
 
-	unlock_fork(id_philo, timetoeat, nb_philo);
+	unlock_fork(id_philo, nb_philo);
 }
 
 void	*routine(void *arg)
@@ -77,7 +77,6 @@ void	*routine(void *arg)
 		ft_usleep(20);
 	while (1)
 	{
-		
 		philo_eat(id_philo, time_eat, nb_philo);
 		philo_sleep(id_philo, time_sleep);
 		philo_think(id_philo);
