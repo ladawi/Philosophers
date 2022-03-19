@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 20:08:02 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/19 17:00:04 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/19 17:56:20 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,11 @@ int	main(int ac, char **av)
 	ft_create_all_thread();
 	while (1)
 	{
-		// printf("MUK\n");
 		if (check_dead(ttd, nb_philo) != 0)
 			break;
 		ft_usleep(1);
 	}
 	ft_pthread_join_all();
-	while (1);
+	// while (1);
 	return (0);
 }
