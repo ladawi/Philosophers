@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:53:45 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/15 14:43:41 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/19 16:50:10 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	set_philo(void)
 	struct timeval	t;
 	size_t			i;
 
-	i = 0;
-	while (++i < 200)
-		sg()->philo_tab[i] = NULL;
+	// i = 0;
+	// while (++i < 200)
+	// 	sg()->philo_tab[i] = NULL;
 	i = 0;
 	while ((int)i < sg()->settings->nb_philo)
 	{
@@ -80,6 +80,10 @@ int	set_mutex(void)
 		return (printf("\n Mutex init failed\n"));
 	if (pthread_mutex_init(&sg()->lock->print, NULL) != 0)
 		return (printf("\n Mutex init failed\n"));
+	if (pthread_mutex_init(&sg()->lock->eat, NULL) != 0)
+		return (printf("\n Mutex init failed\n"));
+	if (pthread_mutex_init(&sg()->lock->tle, NULL) != 0)
+		return (printf("\n Mutex init failed\n"));
 	return (0);
 }
 
@@ -89,7 +93,9 @@ int	set_settings(int ac, char **av)
 		return (printf("\033[0;91mError nb arg\033[0m\n"));
 	if (ft_check_arg_nb(ac, av) == -1)
 		return (printf("\033[0;91mError input in arg\033[0m\n"));
+	// while (1);
 	set_mutex();
+
 	sg()->settings->nb_philo = ft_atoi(av[1]);
 	sg()->settings->time_todie = ft_atoi(av[2]);
 	sg()->settings->time_toeat = ft_atoi(av[3]);
@@ -98,5 +104,6 @@ int	set_settings(int ac, char **av)
 		sg()->settings->nb_eat_max = ft_atoi(av[5]);
 	else
 		sg()->settings->nb_eat_max = -1;
+	sg()->philo_tab = ft_calloc(sizeof(t_philo *), sg()->settings->nb_philo + 1);
 	return (ft_check_overflow(av));
 }

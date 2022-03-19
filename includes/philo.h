@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Philo.h                                            :+:      :+:    :+:   */
+/*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 21:02:23 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/15 15:04:55 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/19 16:30:24 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_philo
 	int				nb_eat;
 	long long int	time_last_eat;
 	size_t			id;
+	int				done_eating;
 	pthread_t		tid;
 	pthread_mutex_t	fork;
 }				t_philo;
@@ -47,16 +48,20 @@ typedef struct s_lock
 	pthread_mutex_t	philo_ded;
 	pthread_mutex_t	sync;
 	pthread_mutex_t	print;
+	pthread_mutex_t	eat;
+	pthread_mutex_t	tle;
 }				t_lock;
 
 typedef struct s_data
 {
 	t_settings		*settings;
-	t_philo			*philo_tab[BUFF_SIZE];
+	// t_philo			*philo_tab[BUFF_SIZE];
+	t_philo			**philo_tab;
 	t_lock			*lock;
 	long long int	timestart;
 	int				all_thread_launched;
 	int				philo_dead;
+	int				eat_done;
 	size_t			thread_done;
 	size_t			philo_done_eating;
 }				t_data;

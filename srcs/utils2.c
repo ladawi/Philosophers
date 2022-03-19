@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 20:16:10 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/15 15:09:58 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/19 15:47:37 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,16 @@ char	*ft_itoa(long int n)
 void	ft_print_status(size_t id_philo, char c)
 {
 	int	is_philo_ded;
-	
+	int	eat_done;
 	pthread_mutex_lock(&sg()->lock->print);
 	pthread_mutex_lock(&sg()->lock->philo_ded);
+	pthread_mutex_lock(&sg()->lock->eat);
 	is_philo_ded = sg()->philo_dead;
+	eat_done = sg()->eat_done;
 	pthread_mutex_unlock(&sg()->lock->philo_ded);
-	if (is_philo_ded == 0)
+	pthread_mutex_unlock(&sg()->lock->eat);
+	id_philo++;
+	if (is_philo_ded == 0 && eat_done == 0)
 	{
 		if (c == 'f')
 		{
