@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 20:48:40 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/20 20:13:20 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/22 18:48:47 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	philo_eat(size_t id_philo, int timetoeat, int nb_philo, int eat_max)
 {
 	lock_fork(id_philo, nb_philo);
 	
-	ft_print_status(id_philo, 'e');
 	pthread_mutex_lock(&sg()->lock->tle);
+	ft_print_status(id_philo, 'e');
 	sg()->philo_tab[id_philo]->time_last_eat = set_timestamp();
 	pthread_mutex_unlock(&sg()->lock->tle);
 	ft_usleep(timetoeat);
@@ -95,7 +95,7 @@ void	*routine(void *arg)
 	pthread_mutex_unlock(&sg()->lock->eat);
 	pthread_mutex_unlock(&sg()->lock->sync);
 	if (id_philo % 2 == 0)
-		ft_usleep(10);
+		ft_usleep(100);
 	while (1)
 	{
 
@@ -104,8 +104,11 @@ void	*routine(void *arg)
 		philo_think(id_philo);
 		pthread_mutex_lock(&sg()->lock->philo_ded);
 		pthread_mutex_lock(&sg()->lock->eat);
-		if (sg()->philo_dead == 1 || (int)(sg()->philo_done_eating) >= nb_philo)
+		if (sg()->philo_dead == 1 || sg()->eat_done == 1)
 		{
+			// pthread_mutex_lock(&sg()->lock->print);
+			// printf("\033[0;91mPhilo[%lu] stopped at %lld || %d\033[0m\n", id_philo + 1, set_timestamp(), sg()->eat_done);
+			pthread_mutex_unlock(&sg()->lock->print);
 			pthread_mutex_unlock(&sg()->lock->philo_ded);
 			pthread_mutex_unlock(&sg()->lock->eat);
 			return (arg);

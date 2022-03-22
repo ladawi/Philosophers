@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 20:16:10 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/20 16:59:54 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/22 19:01:20 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,13 @@
 long long int	set_timestamp(void)
 {
 	struct timeval	t;
+	long long int	ret;
 
 	pthread_mutex_lock(&sg()->lock->timestamp);
-	if (sg()->timestart == 0)
-	{
-		gettimeofday(&t, NULL);
-		sg()->timestart = ft_get_time(t);
-	}
 	gettimeofday(&t, NULL);
+	ret = (ft_get_time(t) - sg()->timestart);
 	pthread_mutex_unlock(&sg()->lock->timestamp);
-	return (ft_get_time(t) - sg()->timestart);
+	return (ret);
 }
 
 static	int	ft_count_length(unsigned long int n)
@@ -86,12 +83,13 @@ void	ft_print_status(size_t id_philo, char c)
 {
 	int	is_philo_ded;
 	int	eat_done;
+
 	pthread_mutex_lock(&sg()->lock->print);
 	pthread_mutex_lock(&sg()->lock->philo_ded);
-	pthread_mutex_lock(&sg()->lock->eat);
 	is_philo_ded = sg()->philo_dead;
-	eat_done = sg()->eat_done;
 	pthread_mutex_unlock(&sg()->lock->philo_ded);
+	pthread_mutex_lock(&sg()->lock->eat);
+	eat_done = sg()->eat_done;
 	pthread_mutex_unlock(&sg()->lock->eat);
 	id_philo++;
 	if (is_philo_ded == 0 && eat_done == 0)

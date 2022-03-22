@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:53:45 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/20 17:50:05 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/22 18:00:07 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	set_settings(int ac, char **av)
 		return (printf("\033[0;91mError input in arg\033[0m\n"));
 	// while (1);
 	set_mutex();
-
+	sg()->philo_done_eating = 0;
 	sg()->settings->nb_philo = ft_atoi(av[1]);
 	sg()->settings->time_todie = ft_atoi(av[2]);
 	sg()->settings->time_toeat = ft_atoi(av[3]);
