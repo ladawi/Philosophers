@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:49:45 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/19 16:53:31 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/22 21:08:48 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ size_t	ft_strlen(const char *s)
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;
-	int	ret;
+	int		ret;
 
 	ret = 0;
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 20:48:40 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/22 18:48:47 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/22 21:00:13 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,56 +25,22 @@ void	philo_sleep(size_t id_philo, int time_sleep)
 void	philo_think(size_t id_philo)
 {
 	ft_print_status(id_philo, 't');
-} 
-
-void	lock_fork(size_t id_philo, int nb_philo)
-{
-	pthread_mutex_lock(&sg()->philo_tab[id_philo]->fork);
-	ft_print_status(id_philo, 'f');
-	if (nb_philo == 1)
-		return (ft_usleep(sg()->settings->time_todie));
-	if (id_philo + 1 >= (size_t)nb_philo)
-	{
-		pthread_mutex_lock(&sg()->philo_tab[0]->fork);
-	}
-	else
-	{
-		pthread_mutex_lock(&sg()->philo_tab[id_philo + 1]->fork);
-	}
-	ft_print_status(id_philo, 'f');
 }
 
-void	unlock_fork(size_t id_philo, int nb_philo)
+int	is_stop(void)
 {
-	pthread_mutex_unlock(&sg()->philo_tab[id_philo]->fork);
-	if (id_philo + 1 >= (size_t)nb_philo)
-		pthread_mutex_unlock(&sg()->philo_tab[0]->fork);
-	else
-		pthread_mutex_unlock(&sg()->philo_tab[id_philo + 1]->fork);
-}
-
-void	philo_eat(size_t id_philo, int timetoeat, int nb_philo, int eat_max)
-{
-	lock_fork(id_philo, nb_philo);
-	
-	pthread_mutex_lock(&sg()->lock->tle);
-	ft_print_status(id_philo, 'e');
-	sg()->philo_tab[id_philo]->time_last_eat = set_timestamp();
-	pthread_mutex_unlock(&sg()->lock->tle);
-	ft_usleep(timetoeat);
-	sg()->philo_tab[id_philo]->nb_eat++;
-	if (eat_max != -1)
+	pthread_mutex_lock(&sg()->lock->philo_ded);
+	pthread_mutex_lock(&sg()->lock->eat);
+	if (sg()->philo_dead == 1 || sg()->eat_done == 1)
 	{
-		pthread_mutex_lock(&sg()->lock->eat);
-		if (sg()->philo_tab[id_philo]->done_eating == 0 &&
-				sg()->philo_tab[id_philo]->nb_eat >= eat_max)
-		{
-			sg()->philo_done_eating++;
-			sg()->philo_tab[id_philo]->done_eating = 1;
-		}
+		pthread_mutex_unlock(&sg()->lock->print);
+		pthread_mutex_unlock(&sg()->lock->philo_ded);
 		pthread_mutex_unlock(&sg()->lock->eat);
+		return (1);
 	}
-	unlock_fork(id_philo, nb_philo);
+	pthread_mutex_unlock(&sg()->lock->philo_ded);
+	pthread_mutex_unlock(&sg()->lock->eat);
+	return (0);
 }
 
 void	*routine(void *arg)
@@ -95,27 +61,12 @@ void	*routine(void *arg)
 	pthread_mutex_unlock(&sg()->lock->eat);
 	pthread_mutex_unlock(&sg()->lock->sync);
 	if (id_philo % 2 == 0)
-		ft_usleep(100);
-	while (1)
+		ft_usleep(5);
+	while (is_stop() != 1)
 	{
-
 		philo_eat(id_philo, time_eat, nb_philo, max_eat);
 		philo_sleep(id_philo, time_sleep);
 		philo_think(id_philo);
-		pthread_mutex_lock(&sg()->lock->philo_ded);
-		pthread_mutex_lock(&sg()->lock->eat);
-		if (sg()->philo_dead == 1 || sg()->eat_done == 1)
-		{
-			// pthread_mutex_lock(&sg()->lock->print);
-			// printf("\033[0;91mPhilo[%lu] stopped at %lld || %d\033[0m\n", id_philo + 1, set_timestamp(), sg()->eat_done);
-			pthread_mutex_unlock(&sg()->lock->print);
-			pthread_mutex_unlock(&sg()->lock->philo_ded);
-			pthread_mutex_unlock(&sg()->lock->eat);
-			return (arg);
-		}
-		pthread_mutex_unlock(&sg()->lock->philo_ded);
-		pthread_mutex_unlock(&sg()->lock->eat);
-
 	}
 	return (arg);
 }

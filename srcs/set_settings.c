@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:53:45 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/22 18:00:07 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/22 21:13:07 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@ void	set_philo(void)
 	struct timeval	t;
 	size_t			i;
 
-	// i = 0;
-	// while (++i < 200)
-	// 	sg()->philo_tab[i] = NULL;
 	i = 0;
 	while ((int)i < sg()->settings->nb_philo)
 	{
@@ -93,7 +90,6 @@ int	set_settings(int ac, char **av)
 		return (printf("\033[0;91mError nb arg\033[0m\n"));
 	if (ft_check_arg_nb(ac, av) == -1)
 		return (printf("\033[0;91mError input in arg\033[0m\n"));
-	// while (1);
 	set_mutex();
 	sg()->philo_done_eating = 0;
 	sg()->settings->nb_philo = ft_atoi(av[1]);

@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 20:08:02 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/22 19:17:14 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/22 20:57:26 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int	check_stop(int timedeath, int nb_philo)
 		if (delta > timedeath)
 		{
 			pthread_mutex_lock(&sg()->lock->print);
-			printf("\033[0;91m%lld | Philo[%d] died | %d . %lld\033[0m\n",
-				set_timestamp(), i + 1, delta, sg()->philo_tab[i]->time_last_eat);
+			printf("\033[0;91m%lld | Philo[%d] died\033[0m\n",
+				set_timestamp(), i + 1);
 			pthread_mutex_unlock(&sg()->lock->print);
 			pthread_mutex_lock(&sg()->lock->philo_ded);
 			sg()->philo_dead = 1;
@@ -60,7 +60,6 @@ void	ft_free(void)
 {
 	int	i;
 	int	nb_philo;
-
 
 	nb_philo = sg()->settings->nb_philo;
 	i = 0;
@@ -78,7 +77,7 @@ void	ft_free(void)
 void	set_timestart(void)
 {
 	struct timeval	t;
-	
+
 	gettimeofday(&t, NULL);
 	sg()->timestart = ft_get_time(t);
 }
@@ -103,7 +102,7 @@ int	main(int ac, char **av)
 	while (1)
 	{
 		if (check_stop(ttd, nb_philo) != 0)
-			break;
+			break ;
 		ft_usleep(5);
 	}
 	ft_pthread_join_all();
