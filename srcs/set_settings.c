@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:53:45 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/19 16:50:10 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/20 17:50:05 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ int	set_settings(int ac, char **av)
 		sg()->settings->nb_eat_max = ft_atoi(av[5]);
 	else
 		sg()->settings->nb_eat_max = -1;
+	if (sg()->settings->nb_philo < 1)
+		return (1);
 	sg()->philo_tab = ft_calloc(sizeof(t_philo *), sg()->settings->nb_philo + 1);
 	return (ft_check_overflow(av));
 }

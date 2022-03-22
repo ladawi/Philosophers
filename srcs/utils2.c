@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 20:16:10 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/19 15:47:37 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/20 16:59:54 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ char	*ft_itoa(long int n)
 {
 	char	*number;
 	int		nb_length;
+	int	i;
 
+	i = 0;
 	if (n < 0)
 		nb_length = 1 + ft_count_length(-n);
 	else
@@ -73,6 +75,8 @@ char	*ft_itoa(long int n)
 	number = (char *)malloc(sizeof(char) * (nb_length + 1));
 	if (!(number))
 		return (NULL);
+	while (i < nb_length)
+		number[i++] = 0;
 	ft_fill_number(number, n, nb_length);
 	number[nb_length] = '\0';
 	return (number);

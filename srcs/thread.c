@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 20:46:28 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/19 15:41:54 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/20 15:27:27 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	ft_create_all_thread(void)
 			printf("\ncan't create thread\n");
 		i++;
 	}
-	printf("---------\n");
 	pthread_mutex_unlock(&sg()->lock->sync);
 }
 

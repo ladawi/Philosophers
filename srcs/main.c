@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 20:08:02 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/19 17:56:20 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/20 17:53:07 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	check_dead(int timedeath, int nb_philo)
 			sg()->philo_dead = 1;
 			pthread_mutex_unlock(&sg()->lock->philo_ded);
 			pthread_mutex_lock(&sg()->lock->print);
-			printf("\033[0;91m%lld | Philo[%d] died\033[0m\n", set_timestamp(), i );
+			printf("\033[0;91m%lld | Philo[%d] died | %d . %lld\033[0m\n", set_timestamp(), i + 1, delta, sg()->philo_tab[i]->time_last_eat);
 			pthread_mutex_unlock(&sg()->lock->print);
 			return (1);
 		}
@@ -46,6 +46,25 @@ int	check_dead(int timedeath, int nb_philo)
 	return (0);
 }
 
+void	ft_free(void)
+{
+	int	i;
+	int	nb_philo;
+
+
+	nb_philo = sg()->settings->nb_philo;
+	i = 0;
+	free(sg()->lock);
+	while (i < nb_philo)
+	{
+		free(sg()->philo_tab[i]);
+		i++;
+	}
+	free(sg()->philo_tab);
+	free(sg()->settings);
+	free(sg());
+}
+
 int	main(int ac, char **av)
 {
 	int	ttd;
@@ -53,15 +72,20 @@ int	main(int ac, char **av)
 
 	set_timestamp();
 	if (set_settings(ac, av) != 0)
+	{
+		free(sg()->settings);
+		free(sg()->lock);
+		free(sg());
 		return (1);
+	}
 	ttd = sg()->settings->time_todie;
 	nb_philo = sg()->settings->nb_philo;
 	set_philo();
-	printf("[%d]_", sg()->settings->nb_philo);
-	printf("[%d]_", sg()->settings->time_todie);
-	printf("[%d]_", sg()->settings->time_toeat);
-	printf("[%d]_", sg()->settings->time_tosleep);
-	printf("[%d]\n", sg()->settings->nb_eat_max);
+	// printf("[%d]_", sg()->settings->nb_philo);
+	// printf("[%d]_", sg()->settings->time_todie);
+	// printf("[%d]_", sg()->settings->time_toeat);
+	// printf("[%d]_", sg()->settings->time_tosleep);
+	// printf("[%d]\n", sg()->settings->nb_eat_max);
 	ft_create_all_thread();
 	while (1)
 	{
@@ -71,5 +95,6 @@ int	main(int ac, char **av)
 	}
 	ft_pthread_join_all();
 	// while (1);
+	ft_free();
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 20:48:40 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/19 16:21:05 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/20 20:13:20 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,13 @@ void	lock_fork(size_t id_philo, int nb_philo)
 	if (nb_philo == 1)
 		return (ft_usleep(sg()->settings->time_todie));
 	if (id_philo + 1 >= (size_t)nb_philo)
+	{
 		pthread_mutex_lock(&sg()->philo_tab[0]->fork);
+	}
 	else
+	{
 		pthread_mutex_lock(&sg()->philo_tab[id_philo + 1]->fork);
+	}
 	ft_print_status(id_philo, 'f');
 }
 
@@ -90,17 +94,14 @@ void	*routine(void *arg)
 	max_eat = sg()->settings->nb_eat_max;
 	pthread_mutex_unlock(&sg()->lock->eat);
 	pthread_mutex_unlock(&sg()->lock->sync);
-	if (id_philo % 2 == 1)
-		ft_usleep(20);
-
+	if (id_philo % 2 == 0)
+		ft_usleep(10);
 	while (1)
 	{
 
 		philo_eat(id_philo, time_eat, nb_philo, max_eat);
 		philo_sleep(id_philo, time_sleep);
-
 		philo_think(id_philo);
-
 		pthread_mutex_lock(&sg()->lock->philo_ded);
 		pthread_mutex_lock(&sg()->lock->eat);
 		if (sg()->philo_dead == 1 || (int)(sg()->philo_done_eating) >= nb_philo)
