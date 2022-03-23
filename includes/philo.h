@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 21:02:23 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/23 14:20:12 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/23 15:29:04 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,6 @@ int						set_settings(int ac, char **av);
 void					set_philo(void);
 void					ft_print_status(size_t id_philo, char c);
 long long unsigned int	ft_get_time(struct timeval arg);
-long long int			set_timestamp();
+long long int			set_timestamp(void);
 
 #endif
