@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 20:16:10 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/23 14:32:07 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/23 19:46:30 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,14 @@ void	ft_print_status(size_t id, char c)
 	if (is_philo_ded == 0 && eat_done == 0)
 	{
 		if (c == 'f')
-			printf("%llu | Philo[%zu] has taken a fork ...\n",
+			printf("%llu %zu has taken a fork\n",
 				set_timestamp(), id);
 		else if (c == 'e')
-			printf("%llu | Philo[%zu] is eating ...\n", set_timestamp(), id);
+			printf("%llu %zu is eating\n", set_timestamp(), id);
 		else if (c == 's')
-			printf("%llu | Philo[%zu] is sleeping ...\n", set_timestamp(), id);
+			printf("%llu %zu is sleeping\n", set_timestamp(), id);
 		else if (c == 't')
-			printf("%llu | Philo[%zu] is thinking ...\n", set_timestamp(), id);
+			printf("%llu %zu is thinking\n", set_timestamp(), id);
 	}
 	pthread_mutex_unlock(&sg()->lock->print);
 }

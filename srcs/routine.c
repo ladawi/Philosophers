@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 20:48:40 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/23 15:50:20 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/23 19:54:09 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,19 @@ int	is_stop(void)
 
 void	*routine(void *arg)
 {
-	size_t	id_philo;
-	int		time_sleep;
-	int		time_eat;
-	int		nb_philo;
-	int		max_eat;
+	t_settings	*info;
+	size_t		id_philo;
 
 	id_philo = (size_t)(arg);
 	pthread_mutex_lock(&sg()->lock->sync);
-	time_sleep = sg()->settings->time_tosleep;
-	time_eat = sg()->settings->time_toeat;
-	nb_philo = sg()->settings->nb_philo;
-	pthread_mutex_lock(&sg()->lock->eat);
-	max_eat = sg()->settings->nb_eat_max;
-	pthread_mutex_unlock(&sg()->lock->eat);
+	info = sg()->settings;
 	pthread_mutex_unlock(&sg()->lock->sync);
 	if (id_philo % 2 == 0)
 		ft_usleep(5);
 	while (is_stop() != 1)
 	{
-		philo_eat(id_philo, time_eat, nb_philo, max_eat);
-		philo_sleep(id_philo, time_sleep);
+		philo_eat(id_philo, info->time_toeat, info->nb_philo, info->nb_eat_max);
+		philo_sleep(id_philo, info->time_tosleep);
 		philo_think(id_philo);
 	}
 	return (arg);

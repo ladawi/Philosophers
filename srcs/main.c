@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 20:08:02 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/23 15:30:13 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/23 19:47:52 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,12 @@ int	check_stop(int timedeath, int nb_philo)
 		pthread_mutex_unlock(&sg()->lock->tle);
 		if (delta > timedeath)
 		{
-			pthread_mutex_lock(&sg()->lock->print);
-			printf("\033[0;91m%lld | Philo[%d] died\033[0m\n",
-				set_timestamp(), i + 1);
-			pthread_mutex_unlock(&sg()->lock->print);
 			pthread_mutex_lock(&sg()->lock->philo_ded);
 			sg()->philo_dead = 1;
 			pthread_mutex_unlock(&sg()->lock->philo_ded);
+			pthread_mutex_lock(&sg()->lock->print);
+			printf("%lld %d died\n", set_timestamp(), i + 1);
+			pthread_mutex_unlock(&sg()->lock->print);
 			return (1);
 		}
 	}
@@ -96,10 +95,10 @@ int	main(int ac, char **av)
 	}
 	ttd = sg()->settings->time_todie;
 	nb_philo = sg()->settings->nb_philo;
-	set_timestart();
 	set_philo();
-	timestart();
 	ft_create_all_thread();
+	set_timestart();
+	timestart();
 	while (1)
 	{
 		if (check_stop(ttd, nb_philo) != 0)

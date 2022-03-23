@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:49:45 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/22 21:08:48 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/23 19:54:18 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,19 @@ size_t	ft_strlen(const char *s)
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;
+	size_t	j;
 	int		ret;
 
 	ret = 0;
 	i = 0;
+	j = 0;
 	if (n == 0)
 		return (0);
-	while (s1[i] == s2[i] && i < n - 1 && s1[i] && s2[i])
+	while (s1[j] == '0')
+		j++;
+	while (s1[i + j] == s2[i] && i < n - 1 && s1[i] + j && s2[i])
 		i++;
-	ret = (unsigned char)s1[i] - (unsigned char)s2[i];
+	ret = (unsigned char)s1[i + j] - (unsigned char)s2[i];
 	free((void *)s2);
 	return (ret);
 }

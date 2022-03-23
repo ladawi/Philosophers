@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 16:03:00 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/23 16:04:10 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/23 19:36:11 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	set_philo(void)
 	{
 		sg()->philo_tab[i] = create_philo(i);
 		gettimeofday(&t, NULL);
-		sg()->philo_tab[i]->time_last_eat = set_timestamp();
+		sg()->philo_tab[i]->time_last_eat = 0;
 		if (pthread_mutex_init(&sg()->philo_tab[i]->fork, NULL) != 0)
 		{
 			printf("\n mutex init failed\n");

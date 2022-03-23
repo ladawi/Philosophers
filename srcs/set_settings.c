@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:53:45 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/23 16:04:15 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/23 19:52:49 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_check_arg_nb(int ac, char **av)
 	j = 0;
 	while (i <= ac && av[i] != 0)
 	{
-		if (av[i][j] >= '0' && av[i][j] <= '9' && j <= 10)
+		if (av[i][j] >= '0' && av[i][j] <= '9')
 			j++;
 		else if (av[i][j] == 0)
 		{
@@ -55,7 +55,11 @@ int	set_mutex(void)
 
 int	check_null(void)
 {
-	if (sg()->settings->nb_philo == 0)
+	if (sg()->settings->nb_philo == 0 || sg()->settings->nb_philo > 250)
+		return (1);
+	if (sg()->settings->time_todie < 50)
+		return (1);
+	if (sg()->settings->time_tosleep < 50)
 		return (1);
 	if (sg()->settings->nb_eat_max == 0)
 	{
@@ -84,7 +88,7 @@ int	set_settings(int ac, char **av)
 	else
 		sg()->settings->nb_eat_max = -1;
 	if (check_null() == 1)
-		return (printf("Error, 0 in input\n"));
+		return (printf("Error input\n"));
 	nb = sg()->settings->nb_philo + 1;
 	(sg()->philo_tab) = ft_calloc(sizeof(t_philo *), nb);
 	return (ft_check_overflow(av));
