@@ -6,7 +6,7 @@
 #    By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/07 12:54:34 by ladawi            #+#    #+#              #
-#    Updated: 2022/03/23 15:31:41 by ladawi           ###   ########.fr        #
+#    Updated: 2022/03/23 16:03:49 by ladawi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ CFLAGS = -Wall -Wextra $(DEBUG) -pthread -g3
 
 
 FILES = main.c \
+		setup_philo.c \
 		set_settings.c \
 		utils.c \
 		utils2.c \
