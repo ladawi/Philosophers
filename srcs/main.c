@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 20:08:02 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/23 14:58:15 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/23 15:30:13 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	check_stop(int timedeath, int nb_philo)
 	i = -1;
 	while (++i < nb_philo)
 	{
-		delta = set_timestamp(sg()->timestart);
+		delta = set_timestamp();
 		pthread_mutex_lock(&sg()->lock->tle);
 		delta = delta - sg()->philo_tab[i]->time_last_eat;
 		pthread_mutex_unlock(&sg()->lock->tle);
@@ -45,7 +45,7 @@ int	check_stop(int timedeath, int nb_philo)
 		{
 			pthread_mutex_lock(&sg()->lock->print);
 			printf("\033[0;91m%lld | Philo[%d] died\033[0m\n",
-				set_timestamp(sg()->timestart), i + 1);
+				set_timestamp(), i + 1);
 			pthread_mutex_unlock(&sg()->lock->print);
 			pthread_mutex_lock(&sg()->lock->philo_ded);
 			sg()->philo_dead = 1;
