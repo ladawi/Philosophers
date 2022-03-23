@@ -6,7 +6,7 @@
 #    By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/07 12:54:34 by ladawi            #+#    #+#              #
-#    Updated: 2022/03/22 19:09:38 by ladawi           ###   ########.fr        #
+#    Updated: 2022/03/23 13:25:55 by ladawi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ FILES = main.c \
 		ft_usleep.c \
 		thread.c \
 		routine.c \
-		check_overflow.c
+		check_overflow.c \
+		philo_eat.c
 
 SRC_PATH = $(shell find srcs -type d)
 vpath %.c $(foreach dir, $(SRC_PATH), $(dir))

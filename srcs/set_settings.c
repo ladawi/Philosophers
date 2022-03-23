@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:53:45 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/22 21:13:07 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/23 13:52:43 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ int	set_mutex(void)
 
 int	set_settings(int ac, char **av)
 {
+	int		nb;
+
 	if (ac != 5 && ac != 6)
 		return (printf("\033[0;91mError nb arg\033[0m\n"));
 	if (ft_check_arg_nb(ac, av) == -1)
@@ -102,6 +104,7 @@ int	set_settings(int ac, char **av)
 		sg()->settings->nb_eat_max = -1;
 	if (sg()->settings->nb_philo < 1)
 		return (1);
-	sg()->philo_tab = ft_calloc(sizeof(t_philo *), sg()->settings->nb_philo + 1);
+	nb = sg()->settings->nb_philo + 1;
+	(sg()->philo_tab) = ft_calloc(sizeof(t_philo *), nb);
 	return (ft_check_overflow(av));
 }
