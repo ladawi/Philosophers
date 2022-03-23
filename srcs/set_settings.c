@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:53:45 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/23 14:24:56 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/23 15:55:36 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,18 @@ int	set_mutex(void)
 	return (0);
 }
 
+int	check_null(void)
+{
+	if (sg()->settings->nb_philo == 0)
+		return (1);
+	if (sg()->settings->nb_eat_max == 0)
+	{
+		sg()->philo_done_eating = sg()->settings->nb_philo;
+		sg()->eat_done = 1;
+	}
+	return (0);
+}
+
 int	set_settings(int ac, char **av)
 {
 	int		nb;
@@ -102,8 +114,8 @@ int	set_settings(int ac, char **av)
 		sg()->settings->nb_eat_max = ft_atoi(av[5]);
 	else
 		sg()->settings->nb_eat_max = -1;
-	if (sg()->settings->nb_philo < 1)
-		return (1);
+	if (check_null() == 1)
+		return (printf("Error, 0 in input\n"));
 	nb = sg()->settings->nb_philo + 1;
 	(sg()->philo_tab) = ft_calloc(sizeof(t_philo *), nb);
 	return (ft_check_overflow(av));

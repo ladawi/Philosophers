@@ -6,7 +6,7 @@
 #    By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/07 12:54:34 by ladawi            #+#    #+#              #
-#    Updated: 2022/03/23 14:42:15 by ladawi           ###   ########.fr        #
+#    Updated: 2022/03/23 15:31:41 by ladawi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = philo
 CC = clang
 HEAD = -Iincludes
 CFLAGS = -Wall -Wextra $(DEBUG) -pthread -g3
-DEBUG = -fsanitize=address
+# DEBUG = -fsanitize=address
 
 
 FILES = main.c \

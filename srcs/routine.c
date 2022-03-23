@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 20:48:40 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/23 14:24:55 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/23 15:50:20 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	philo_sleep(size_t id_philo, int time_sleep)
 	gettimeofday(&time, NULL);
 	ft_print_status(id_philo, 's');
 	ft_usleep(time_sleep);
-	gettimeofday(&time, NULL);
 }
 
 void	philo_think(size_t id_philo)

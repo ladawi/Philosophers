@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 20:59:19 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/22 21:00:40 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/23 15:59:35 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	lock_fork(size_t id_philo, int nb_philo)
 	pthread_mutex_lock(&sg()->philo_tab[id_philo]->fork);
 	ft_print_status(id_philo, 'f');
 	if (nb_philo == 1)
-		return (ft_usleep(sg()->settings->time_todie));
+		return (ft_usleep(sg()->settings->time_todie + 1));
 	if (id_philo + 1 >= (size_t)nb_philo)
 	{
 		pthread_mutex_lock(&sg()->philo_tab[0]->fork);
