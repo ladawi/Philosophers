@@ -6,21 +6,22 @@
 #    By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/07 12:54:34 by ladawi            #+#    #+#              #
-#    Updated: 2022/03/23 13:25:55 by ladawi           ###   ########.fr        #
+#    Updated: 2022/03/23 14:42:15 by ladawi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 CC = clang
 HEAD = -Iincludes
-CFLAGS = -Wall -Wextra $(DEBUG) -pthread
-# DEBUG = -fsanitize=address
+CFLAGS = -Wall -Wextra $(DEBUG) -pthread -g3
+DEBUG = -fsanitize=address
 
 
 FILES = main.c \
 		set_settings.c \
 		utils.c \
 		utils2.c \
+		utils3.c \
 		singleton.c \
 		ft_usleep.c \
 		thread.c \

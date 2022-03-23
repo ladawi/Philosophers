@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 20:16:10 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/22 21:11:39 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/23 14:32:07 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@ long long int	set_timestamp(void)
 	struct timeval	t;
 	long long int	ret;
 
-	pthread_mutex_lock(&sg()->lock->timestamp);
 	gettimeofday(&t, NULL);
-	ret = (ft_get_time(t) - sg()->timestart);
-	pthread_mutex_unlock(&sg()->lock->timestamp);
+	ret = (ft_get_time(t) - timestart());
 	return (ret);
 }
 

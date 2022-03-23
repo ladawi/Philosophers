@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 21:02:23 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/23 13:25:40 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/23 14:20:12 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int						ft_strncmp(const char *s1, const char *s2, size_t n);
 int						ft_atoi(const char *str);
 char					*ft_itoa(long int n);
 
+long long int			timestart(void);
 int						check_stop(int timedeath, int nb_philo);
 void					ft_usleep(long long unsigned int sleep_time);
 void					philo_eat(size_t id_philo,
@@ -88,6 +89,6 @@ int						set_settings(int ac, char **av);
 void					set_philo(void);
 void					ft_print_status(size_t id_philo, char c);
 long long unsigned int	ft_get_time(struct timeval arg);
-long long int			set_timestamp(void);
+long long int			set_timestamp();
 
 #endif
