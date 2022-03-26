@@ -6,13 +6,13 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 20:46:28 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/23 19:33:53 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/25 14:08:58 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_create_all_thread(void)
+int	ft_create_all_thread(void)
 {
 	size_t	i;
 	int		err;
@@ -24,13 +24,17 @@ void	ft_create_all_thread(void)
 		err = pthread_create(&(sg()->philo_tab[i]->tid),
 				NULL, &routine, (void *)i);
 		if (err != 0)
-			printf("\ncan't create thread\n");
+		{
+			printf("\nCan't create thread\n");
+			return (-1);
+		}
 		i++;
 	}
 	pthread_mutex_unlock(&sg()->lock->sync);
+	return (0);
 }
 
-void	ft_pthread_join_all(void)
+int	ft_pthread_join_all(void)
 {
 	size_t	i;
 	int		err;
@@ -40,7 +44,11 @@ void	ft_pthread_join_all(void)
 	{
 		err = pthread_join(sg()->philo_tab[i]->tid, NULL);
 		if (err != 0)
-			printf("\nCan't join thread %s\n", strerror(err));
+		{
+			printf("\nCan't join thread %d\n", err);
+			return (-1);
+		}
 		i++;
 	}
+	return (0);
 }

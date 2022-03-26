@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 21:02:23 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/23 19:53:48 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/25 14:03:38 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ void					philo_eat(size_t id_philo,
 							int timetoeat, int nb_philo, int eat_max);
 void					*routine(void *arg);
 void					set_philo(void);
-void					ft_create_all_thread(void);
-void					ft_pthread_join_all(void);
+int						ft_create_all_thread(void);
+int						ft_pthread_join_all(void);
 int						ft_check_arg_nb(int ac, char **av);
 int						ft_check_overflow(char **av);
 int						set_settings(int ac, char **av);

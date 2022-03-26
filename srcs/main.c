@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 20:08:02 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/23 19:47:52 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/25 14:09:08 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,9 @@ int	main(int ac, char **av)
 	ttd = sg()->settings->time_todie;
 	nb_philo = sg()->settings->nb_philo;
 	set_philo();
-	ft_create_all_thread();
+	if (ft_create_all_thread() == -1)
+		return (1);
 	set_timestart();
-	timestart();
 	while (1)
 	{
 		if (check_stop(ttd, nb_philo) != 0)
