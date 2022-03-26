@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 20:46:28 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/25 14:08:58 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/26 15:48:11 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	ft_create_all_thread(void)
 		}
 		i++;
 	}
+	set_timestart();
 	pthread_mutex_unlock(&sg()->lock->sync);
 	return (0);
 }

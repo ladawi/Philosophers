@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 20:48:40 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/23 19:54:09 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/26 16:36:22 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,13 @@ void	*routine(void *arg)
 		ft_usleep(5);
 	while (is_stop() != 1)
 	{
-		philo_eat(id_philo, info->time_toeat, info->nb_philo, info->nb_eat_max);
-		philo_sleep(id_philo, info->time_tosleep);
-		philo_think(id_philo);
+		if (is_stop() != 1)
+			philo_eat(id_philo, info->time_toeat, info->nb_philo,
+				info->nb_eat_max);
+		if (is_stop() != 1)
+			philo_sleep(id_philo, info->time_tosleep);
+		if (is_stop() != 1)
+			philo_think(id_philo);
 	}
 	return (arg);
 }

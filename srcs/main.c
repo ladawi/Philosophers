@@ -6,7 +6,7 @@
 /*   By: ladawi <ladawi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 20:08:02 by ladawi            #+#    #+#             */
-/*   Updated: 2022/03/25 14:09:08 by ladawi           ###   ########.fr       */
+/*   Updated: 2022/03/26 16:36:55 by ladawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,22 @@ void	ft_free(void)
 	free(sg());
 }
 
-void	set_timestart(void)
+void	delall_mutex(void)
 {
-	struct timeval	t;
+	int	i;
 
-	gettimeofday(&t, NULL);
-	sg()->timestart = ft_get_time(t);
+	i = 0;
+	pthread_mutex_destroy(&sg()->lock->all);
+	pthread_mutex_destroy(&sg()->lock->print);
+	pthread_mutex_destroy(&sg()->lock->timestamp);
+	pthread_mutex_destroy(&sg()->lock->philo_ded);
+	pthread_mutex_destroy(&sg()->lock->eat);
+	pthread_mutex_destroy(&sg()->lock->tle);
+	while (i < sg()->settings->nb_philo)
+	{
+		pthread_mutex_destroy(&sg()->philo_tab[i]->fork);
+		i++;
+	}
 }
 
 int	main(int ac, char **av)
@@ -98,7 +108,6 @@ int	main(int ac, char **av)
 	set_philo();
 	if (ft_create_all_thread() == -1)
 		return (1);
-	set_timestart();
 	while (1)
 	{
 		if (check_stop(ttd, nb_philo) != 0)
@@ -106,6 +115,7 @@ int	main(int ac, char **av)
 		ft_usleep(5);
 	}
 	ft_pthread_join_all();
+	delall_mutex();
 	ft_free();
 	return (0);
 }
